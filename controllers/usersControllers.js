@@ -79,7 +79,8 @@ const usersController = {
                     res.status(404).json({ message: 'No User with this particular ID!' });
                     return;
                 }
-                res.json(dbUsersData);
+                // res.json(dbUsersData);
+                res.json({ message: 'User and associated thoughts deleted!' });
             })
             .catch(err => res.status(400).json(err));
     },

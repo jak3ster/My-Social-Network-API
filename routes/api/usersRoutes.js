@@ -1,7 +1,7 @@
 // Require express router
 const router = require('express').Router();
 
-// Set requirements (from users-controller)
+// Set requirements (from usersControllers)
 const {
     getAllUsers,
     getUsersById,
@@ -10,7 +10,7 @@ const {
     deleteUsers,
     addFriend,
     deleteFriend
-} = require('../controllers/users-controller');
+} = require('../../controllers/usersControllers');
 
 // -- Directs to: /api/users <GET, POST>
 router

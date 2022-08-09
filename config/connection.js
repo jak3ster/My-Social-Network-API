@@ -6,12 +6,11 @@ const connectionString =
     process.env.MONGODB_URI || 'mongodb://localhost:27017/socialNetworkDB';
 
 connect(connectionString, {
-    useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
 
 // Use this to log mongo queries being executed!
-set('debug', true);
+// set('debug', true);
 
 module.exports = connection;
