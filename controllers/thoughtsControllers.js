@@ -90,36 +90,38 @@ const thoughtsController = {
 
     // Add a new Reaction
     addReaction({ params, body }, res) {
-        Thoughts.findOneAndUpdate({ _id: params.thoughtId }, { $push: { reactions: body } }, { new: true, runValidators: true })
-            .populate({
-                path: 'reactions',
-                select: '-__v'
-            })
-            .select('-__v')
-            .then(dbThoughtsData => {
-                if (!dbThoughtsData) {
-                    res.status(404).json({ message: 'No thoughts with this particular ID!' });
-                    return;
-                }
-                res.json(dbThoughtsData);
-            })
-            .catch(err => res.status(400).json(err))
-
+        Thoughts.findOneAndUpdate(
+            { _id: params.thoughtId }, 
+            { $push: { reactions: body } }, 
+            { runValidators: true, new: true }
+        ).populate({
+            path: 'reactions',
+            select: '-__v'
+        }).select('-__v')
+        .then(dbThoughtsData => {
+            if (!dbThoughtsData) {
+                res.status(404).json({ message: 'No thoughts with this particular ID!' });
+                return;
+            }
+            res.json(dbThoughtsData);
+        })
+        .catch(err => res.status(400).json(err))
     },
 
     // Delete a reaction by ID
     deleteReaction({ params }, res) {
-        Thoughts.findOneAndUpdate({ _id: params.thoughtId }, { $pull: { reactions: { reactionId: params.reactionId } } }, { new: true })
-            .then(dbThoughtsData => {
+        Thoughts.findOneAndUpdate(
+                { _id: params.thoughtId }, 
+                { $pull: { reactions: { reactionId: params.reactionId } } }, 
+                { runValidators: true, new: true }
+            ).then(dbThoughtsData => {
                 if (!dbThoughtsData) {
                     res.status(404).json({ message: 'No thoughts with this particular ID!' });
                     return;
                 }
                 res.json(dbThoughtsData);
-            })
-            .catch(err => res.status(400).json(err));
+            }).catch(err => res.status(400).json(err));
     }
-
 };
 
 // Export module thought controller

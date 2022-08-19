@@ -80,6 +80,7 @@ const usersController = {
                     return;
                 }
                 // res.json(dbUsersData);
+                // res.json({ message: 'User and associated thoughts deleted!' });
                 res.json({ message: 'User and associated thoughts deleted!' });
             })
             .catch(err => res.status(400).json(err));
